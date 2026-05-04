@@ -1,0 +1,199 @@
+---
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="tgs">
+  <RevealOnScroll client:visible>
+    <div class="container tgs-inner">
+      <div class="tgs-tag" data-reveal>
+        <span class="eyebrow">— Sister House —</span>
+      </div>
+
+      <div class="tgs-card" data-reveal>
+        <div class="tgs-content">
+          <h2 class="display tgs-title">
+            The Groom Squad<br/>
+            <em class="gold-italic">: Suit Gallery.</em>
+          </h2>
+          <p class="tgs-body">
+            A bespoke suit showroom in Tipanoy, Iligan — meticulously tailored
+            for the gentlemen at Sean's weddings. Visit by appointment only.
+          </p>
+
+          <div class="tgs-meta">
+            <div>
+              <span class="tgs-label">Showroom</span>
+              <span class="tgs-value">Doña Maria Phase 1, Tipanoy, Iligan</span>
+            </div>
+            <div>
+              <span class="tgs-label">Access</span>
+              <span class="tgs-value">By appointment</span>
+            </div>
+          </div>
+
+          <a href="#contact" class="tgs-link">
+            Enquire about a suit
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="tgs-mark">
+          <div class="monogram">
+            <span class="g">T</span>
+            <span class="s">G</span>
+            <span class="g">S</span>
+          </div>
+          <span class="tgs-est">Est. 2024 · Iligan</span>
+        </div>
+      </div>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<style>
+  .tgs {
+    padding: 100px 0 140px;
+    background: var(--ink-deep);
+    border-top: 1px solid var(--line);
+  }
+
+  .tgs-tag {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .tgs-card {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    background: linear-gradient(135deg, var(--surface-warm) 0%, var(--surface) 100%);
+    border: 1px solid var(--line);
+    padding: 80px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tgs-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 1px solid var(--gold-deep);
+    pointer-events: none;
+    opacity: 0.4;
+    margin: 12px;
+  }
+
+  .tgs-title {
+    font-size: clamp(40px, 6vw, 88px);
+    color: var(--bone);
+    line-height: 0.95;
+    margin-bottom: 32px;
+  }
+
+  .tgs-title em { font-style: italic; }
+
+  .tgs-body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.78);
+    max-width: 50ch;
+    margin-bottom: 40px;
+  }
+
+  .tgs-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+
+  .tgs-meta > div { display: flex; flex-direction: column; gap: 6px; }
+
+  .tgs-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+  }
+
+  .tgs-value {
+    font-family: var(--font-display);
+    color: var(--bone);
+    font-size: 16px;
+  }
+
+  .tgs-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold-bright);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    border-bottom: 1px solid var(--gold-deep);
+    padding-bottom: 8px;
+    transition: gap 0.4s var(--ease-luxe), color 0.4s var(--ease-luxe);
+  }
+
+  .tgs-link:hover {
+    gap: 18px;
+    color: var(--gold);
+  }
+
+  .tgs-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    border-left: 1px solid var(--line);
+    padding-left: 60px;
+  }
+
+  .monogram {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 140px;
+    line-height: 1;
+    color: var(--gold);
+    display: flex;
+    gap: 4px;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 30px rgba(200, 166, 100, 0.2);
+  }
+
+  .monogram .s {
+    color: var(--bone);
+    font-size: 180px;
+    transform: translateY(8px);
+  }
+
+  .tgs-est {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .tgs-card {
+      grid-template-columns: 1fr;
+      padding: 48px 32px;
+      gap: 40px;
+    }
+    .tgs-mark {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      padding-left: 0;
+      padding-top: 40px;
+    }
+    .tgs-meta { grid-template-columns: 1fr; gap: 16px; }
+    .monogram { font-size: 100px; }
+    .monogram .s { font-size: 130px; }
+  }
+</style>

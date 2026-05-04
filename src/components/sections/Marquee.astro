@@ -1,0 +1,115 @@
+---
+// Full-bleed cities marquee — shared across all hero concepts.
+const cities = [
+  'Iligan', 'Singapore', 'Manila', 'Cebu', 'Bohol',
+  'Cagayan de Oro', 'Pagadian', 'Bukidnon', 'Antipolo',
+  'Dahilayan', 'Valencia',
+];
+// Duplicate so xPercent: -50 loops seamlessly
+const list = [...cities, ...cities];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {list.map((c) => (
+      <>
+        <span>{c}</span><span class="dot">✦</span>
+      </>
+    ))}
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  const startMarquee = () => {
+    const track = document.querySelector<HTMLElement>('.marquee-track');
+    if (!track) return;
+    // Avoid double-tweening if a hero script also tweened it
+    if (gsap.getTweensOf(track).length) return;
+    gsap.to(track, {
+      xPercent: -50,
+      duration: 40,
+      ease: 'none',
+      repeat: -1,
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startMarquee);
+  } else {
+    startMarquee();
+  }
+</script>
+
+<style is:global>
+  .marquee {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    background: var(--surface);
+  }
+
+  .marquee::before,
+  .marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--surface), transparent);
+  }
+  .marquee::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--surface), transparent);
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    white-space: nowrap;
+    will-change: transform;
+    padding-left: 32px;
+  }
+
+  .marquee-track > span {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(18px, 2.2vw, 28px);
+    color: var(--bone-soft);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  .marquee-track .dot {
+    color: var(--gold);
+    font-style: normal;
+    font-size: 11px;
+  }
+
+  @media (max-width: 600px) {
+    .marquee {
+      padding: 16px 0;
+    }
+    .marquee-track {
+      gap: 22px;
+    }
+    .marquee::before,
+    .marquee::after {
+      width: 60px;
+    }
+  }
+</style>

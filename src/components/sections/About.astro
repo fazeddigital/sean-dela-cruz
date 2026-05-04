@@ -1,0 +1,165 @@
+---
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="about" id="about">
+  <RevealOnScroll client:visible>
+    <div class="about-inner container">
+      <div class="about-meta">
+        <span class="eyebrow" data-reveal><span class="gold-rule"></span>Chapter I · The Host</span>
+      </div>
+
+      <div class="about-content">
+        <h2 class="display about-headline">
+          <span data-reveal>The wedding day belongs</span>
+          <span data-reveal>to the couple. The <em class="gold-italic">rhythm</em></span>
+          <span data-reveal>of it belongs to the host.</span>
+        </h2>
+
+        <div class="about-grid">
+          <div class="about-col" data-reveal>
+            <p class="about-body">
+              For seven seasons, Sean has anchored the most personal nights of
+              other people's lives — weddings, debuts, brand launches, corporate
+              galas — across eleven cities and counting.
+            </p>
+            <p class="about-body">
+              The work is invisible when it lands: a room that flows, a couple
+              that breathes, a program that ends on the right beat. That is the
+              craft. That is the booking.
+            </p>
+          </div>
+
+          <aside class="about-col side" data-reveal>
+            <dl class="about-facts">
+              <div>
+                <dt>Languages</dt>
+                <dd>English · Filipino · Bisaya</dd>
+              </div>
+              <div>
+                <dt>Specialty</dt>
+                <dd>Weddings & high-end private events</dd>
+              </div>
+              <div>
+                <dt>Travel</dt>
+                <dd>Available worldwide</dd>
+              </div>
+              <div>
+                <dt>Group</dt>
+                <dd>SPDC Group of Companies</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<style>
+  .about {
+    padding: 160px 0 120px;
+    position: relative;
+  }
+
+  .about::before {
+    content: "II";
+    position: absolute;
+    top: 60px;
+    right: var(--pad);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 220px;
+    color: var(--surface-warm);
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .about-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-meta {
+    padding-top: 12px;
+  }
+
+  .about-headline {
+    font-size: clamp(36px, 5.6vw, 84px);
+    margin-bottom: 80px;
+    color: var(--bone);
+  }
+
+  .about-headline span {
+    display: block;
+  }
+
+  .about-headline em {
+    font-style: italic;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    border-top: 1px solid var(--line);
+    padding-top: 48px;
+  }
+
+  .about-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(244, 239, 230, 0.85);
+    max-width: 56ch;
+    margin-bottom: 24px;
+  }
+
+  .about-body:last-child { margin-bottom: 0; }
+
+  .about-facts {
+    display: grid;
+    gap: 28px;
+  }
+
+  .about-facts > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about-facts dt {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+  }
+
+  .about-facts dd {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--bone);
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 960px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about::before {
+      font-size: 140px;
+      top: 20px;
+    }
+  }
+</style>

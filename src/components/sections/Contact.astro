@@ -1,0 +1,282 @@
+---
+import { profile } from '../../lib/data';
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="contact" id="contact">
+  <RevealOnScroll client:visible>
+    <div class="container contact-inner">
+      <div class="contact-marker" data-reveal>
+        <span class="eyebrow"><span class="gold-rule"></span>Chapter V · Reserve</span>
+      </div>
+
+      <h2 class="display contact-title" data-reveal>
+        Let's plan a night<br/>
+        worth <em class="gold-italic">remembering.</em>
+      </h2>
+
+      <p class="contact-lede" data-reveal>
+        Sean books a limited number of dates each season. Reach out with the
+        date, the city, and the kind of evening you're imagining.
+      </p>
+
+      <div class="contact-grid">
+        <a href={`tel:${profile.phone.replace(/\s/g, '')}`} class="contact-card" data-reveal>
+          <span class="card-eyebrow">Direct Line</span>
+          <span class="card-value">{profile.phone}</span>
+          <span class="card-meta">Mon–Sat · 9 to 9 PHT</span>
+        </a>
+
+        <a href={`mailto:${profile.email}`} class="contact-card" data-reveal>
+          <span class="card-eyebrow">Correspondence</span>
+          <span class="card-value email">seanpreildelacruz@<br/>spdcgroupofcompanies.com</span>
+          <span class="card-meta">Replies within 24 hours</span>
+        </a>
+
+        <a href={profile.youtube} target="_blank" rel="noopener" class="contact-card" data-reveal>
+          <span class="card-eyebrow">Watch the work</span>
+          <span class="card-value">YouTube · Sean dela Cruz Official</span>
+          <span class="card-meta">Latest reels & full sets</span>
+        </a>
+      </div>
+
+      <div class="contact-cta" data-reveal>
+        <a href={`mailto:${profile.email}?subject=Booking%20Enquiry`} class="huge-cta">
+          <span>Send a Booking Enquiry</span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M3 19L19 3M19 3H7M19 3V15" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<footer class="foot">
+  <div class="container foot-inner">
+    <div class="foot-col">
+      <span class="foot-mark">S</span>
+      <p class="foot-name">Sean dela Cruz</p>
+      <p class="foot-sub">Wedding & Events Host · Iligan, PH</p>
+    </div>
+
+    <div class="foot-col foot-links">
+      <span class="foot-label">Navigate</span>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+    </div>
+
+    <div class="foot-col foot-links">
+      <span class="foot-label">Elsewhere</span>
+      <a href={profile.facebook} target="_blank" rel="noopener">Facebook</a>
+      <a href={profile.youtube} target="_blank" rel="noopener">YouTube</a>
+      <a href={`mailto:${profile.email}`}>Email</a>
+    </div>
+
+    <div class="foot-col foot-stamp">
+      <span class="foot-label">Issue</span>
+      <span class="foot-issue">№ MMXXVI · Vol. IV</span>
+      <span class="foot-copy">© {new Date().getFullYear()} SPDC Group of Companies. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .contact {
+    padding: 160px 0 120px;
+    background: var(--ink);
+    position: relative;
+  }
+
+  .contact-marker {
+    margin-bottom: 32px;
+  }
+
+  .contact-title {
+    font-size: clamp(48px, 8vw, 130px);
+    color: var(--bone);
+    margin-bottom: 40px;
+    line-height: 0.92;
+  }
+
+  .contact-title em { font-style: italic; }
+
+  .contact-lede {
+    max-width: 60ch;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.78);
+    margin-bottom: 80px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.5s var(--ease-luxe), background 0.5s var(--ease-luxe);
+    min-height: 200px;
+    justify-content: space-between;
+  }
+
+  .contact-card:hover {
+    border-color: var(--gold-deep);
+    background: var(--surface-warm);
+  }
+
+  .card-eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+  }
+
+  .card-value {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 24px);
+    color: var(--bone);
+    line-height: 1.25;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-value.email { font-size: 14px; word-break: break-word; }
+
+  .card-meta {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+  }
+
+  .contact-cta {
+    border-top: 1px solid var(--line);
+    padding-top: 60px;
+  }
+
+  .huge-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--bone);
+    transition: color 0.5s var(--ease-luxe), gap 0.5s var(--ease-luxe);
+    line-height: 1;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+  }
+
+  .huge-cta:hover {
+    color: var(--gold-bright);
+    gap: 36px;
+    border-color: var(--gold);
+  }
+
+  .huge-cta svg {
+    transition: transform 0.5s var(--ease-luxe);
+  }
+
+  .huge-cta:hover svg { transform: rotate(45deg); }
+
+  /* Footer */
+  .foot {
+    background: var(--ink-deep);
+    border-top: 1px solid var(--line);
+    padding: 60px 0 40px;
+  }
+
+  .foot-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .foot-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .foot-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--bone);
+  }
+
+  .foot-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .foot-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .foot-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .foot-links a {
+    font-size: 13px;
+    color: var(--bone-soft);
+    transition: color 0.4s var(--ease-luxe);
+  }
+
+  .foot-links a:hover { color: var(--gold-bright); }
+
+  .foot-stamp { display: flex; flex-direction: column; gap: 8px; }
+
+  .foot-issue {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--bone);
+    font-size: 16px;
+  }
+
+  .foot-copy {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .foot-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 540px) {
+    .foot-inner { grid-template-columns: 1fr; }
+  }
+</style>

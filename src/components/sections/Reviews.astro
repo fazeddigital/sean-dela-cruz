@@ -1,0 +1,124 @@
+---
+import { reviews } from '../../lib/data';
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="reviews" id="reviews">
+  <RevealOnScroll client:visible stagger={0.15}>
+    <div class="container">
+      <header class="reviews-head">
+        <span class="eyebrow" data-reveal>
+          <span class="gold-rule"></span>Chapter IV · The Word
+        </span>
+        <h2 class="display reviews-title" data-reveal>
+          100% recommend.<br/>
+          <em class="gold-italic">Read why.</em>
+        </h2>
+      </header>
+
+      <div class="reviews-grid">
+        {reviews.map((r, i) => (
+          <article class="review" data-reveal>
+            <span class="quote-mark">“</span>
+            <p class="review-quote">{r.quote}</p>
+            <footer class="review-foot">
+              <span class="review-author">{r.author}</span>
+              <span class="review-event">{r.event}</span>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<style>
+  .reviews {
+    padding: 140px 0;
+    position: relative;
+  }
+
+  .reviews-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 60px;
+    margin-bottom: 80px;
+  }
+
+  .reviews-title {
+    font-size: clamp(40px, 5.4vw, 84px);
+    color: var(--bone);
+    line-height: 1;
+  }
+
+  .reviews-title em { font-style: italic; }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .review {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 36px 32px 32px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 320px;
+    transition: border-color 0.5s var(--ease-luxe), transform 0.5s var(--ease-luxe);
+  }
+
+  .review:hover {
+    border-color: var(--gold-deep);
+    transform: translateY(-4px);
+  }
+
+  .quote-mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 80px;
+    line-height: 0.6;
+    height: 30px;
+  }
+
+  .review-quote {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--bone);
+    flex: 1;
+  }
+
+  .review-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+
+  .review-author {
+    font-size: 13px;
+    color: var(--bone);
+    letter-spacing: 0.04em;
+  }
+
+  .review-event {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+  }
+
+  @media (max-width: 960px) {
+    .reviews-head { grid-template-columns: 1fr; gap: 24px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+</style>

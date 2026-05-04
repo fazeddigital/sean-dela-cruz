@@ -1,0 +1,59 @@
+---
+import Stats from '../react/Stats';
+---
+
+<section class="stats-section">
+  <Stats client:visible />
+</section>
+
+<style is:global>
+  .stats-section {
+    padding: 100px 0;
+    background: var(--ink);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 24px 12px 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-index {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+  }
+
+  .stat-num {
+    font-size: clamp(56px, 7vw, 96px);
+    color: var(--bone);
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--bone-soft);
+    margin-top: 8px;
+  }
+
+  @media (max-width: 800px) {
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .stat:nth-child(2) { border-right: none; }
+  }
+</style>

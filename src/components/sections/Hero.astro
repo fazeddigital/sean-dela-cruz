@@ -1,0 +1,491 @@
+---
+import { profile, portraitHero } from '../../lib/data';
+import Marquee from './Marquee.astro';
+---
+
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-frame">
+    <div class="hero-corner tl"></div>
+    <div class="hero-corner tr"></div>
+    <div class="hero-corner bl"></div>
+    <div class="hero-corner br"></div>
+  </div>
+
+  <div class="hero-grid-layout">
+    <aside class="hero-rail left">
+      <div class="rail-block hero-meta-row">
+        <span class="rail-label">Index</span>
+        <span class="rail-value">№ 001</span>
+      </div>
+      <div class="rail-block hero-meta-row">
+        <span class="rail-label">Discipline</span>
+        <span class="rail-value">Hosting · Emcee</span>
+      </div>
+      <div class="rail-block hero-meta-row">
+        <span class="rail-label">Based in</span>
+        <span class="rail-value">Iligan, PH</span>
+      </div>
+      <div class="rail-block hero-meta-row">
+        <span class="rail-label">Hosting Since</span>
+        <span class="rail-value">{profile.hostingSince}</span>
+      </div>
+    </aside>
+
+    <div class="hero-stage">
+      <div class="hero-eyebrow eyebrow line-mask">
+        <span class="line-inner hero-line-inner">
+          <span class="gold-rule"></span>The Iligan Host · Volume IV
+        </span>
+      </div>
+
+      <h1 class="display hero-headline">
+        <span class="line-mask"><span class="line-inner hero-line-inner">Sean</span></span>
+        <span class="line-mask"><span class="line-inner hero-line-inner gold-italic">dela&nbsp;Cruz</span></span>
+        <span class="line-mask"><span class="line-inner hero-line-inner">— a host for</span></span>
+        <span class="line-mask"><span class="line-inner hero-line-inner">unforgettable&nbsp;nights.</span></span>
+      </h1>
+
+      <div class="hero-rule-wrap">
+        <div class="hero-rule"></div>
+      </div>
+
+      <p class="hero-lede hero-fade">
+        For an organized, fun-filled and memorable event — booked across the
+        Philippines and Singapore. Eleven cities, one voice on the mic.
+      </p>
+
+      <div class="hero-actions hero-fade">
+        <a href="#contact" class="btn-primary">
+          <span>Reserve a Date</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </a>
+        <a href="#gallery" class="btn-ghost">View Highlights</a>
+      </div>
+    </div>
+
+    <aside class="hero-rail right">
+      <div class="portrait-frame hero-portrait">
+        <img
+          src={portraitHero}
+          alt="Sean Sajonia dela Cruz"
+          loading="eager"
+          onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542327897-d73f4005b533?w=900&q=80&auto=format&fit=crop';"
+        />
+        <div class="portrait-tag">
+          <span class="eyebrow">Plate I</span>
+          <span class="portrait-tag-sub">Featured · {new Date().getFullYear()}</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="scroll-indicator hero-fade">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<Marquee />
+
+<script>
+  import gsap from 'gsap';
+
+  // Hero entrance — fires after DOM ready
+  const run = () => {
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+    gsap.set('.hero-line-inner', { yPercent: 110 });
+    gsap.set('.hero-fade', { opacity: 0, y: 16 });
+    gsap.set('.hero-portrait', { scale: 1.12, opacity: 0 });
+    gsap.set('.hero-rule', { scaleX: 0, transformOrigin: 'left center' });
+    gsap.set('.hero-meta-row', { opacity: 0, x: -10 });
+
+    tl.to('.hero-eyebrow .hero-line-inner', {
+      yPercent: 0,
+      duration: 1.1,
+      delay: 0.2,
+    })
+      .to('.hero-rule', { scaleX: 1, duration: 1.4, ease: 'power3.out' }, '<0.1')
+      .to(
+        '.hero-headline .hero-line-inner',
+        { yPercent: 0, duration: 1.4, stagger: 0.08 },
+        '<0.05'
+      )
+      .to(
+        '.hero-portrait',
+        { scale: 1, opacity: 1, duration: 1.6, ease: 'power3.out' },
+        '<0.2'
+      )
+      .to('.hero-meta-row', { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 }, '<0.4')
+      .to('.hero-fade', { opacity: 1, y: 0, duration: 1, stagger: 0.06 }, '<0.1');
+
+    // Floating portrait
+    gsap.to('.hero-portrait', {
+      y: -14,
+      duration: 4,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: 2,
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 120px var(--pad) 100px;
+    isolation: isolate;
+  }
+
+  /* Background */
+  .hero-bg { position: absolute; inset: 0; z-index: -1; }
+
+  .hero-glow {
+    position: absolute;
+    width: 70vw;
+    height: 70vw;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(200, 166, 100, 0.15) 0%, rgba(200, 166, 100, 0) 60%);
+    filter: blur(60px);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+    opacity: 0.4;
+  }
+
+  /* Decorative corners */
+  .hero-frame {
+    position: absolute;
+    inset: 90px var(--pad) 130px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--gold);
+  }
+  .hero-corner.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .hero-corner.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .hero-corner.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .hero-corner.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+  /* Grid layout */
+  .hero-grid-layout {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr) clamp(300px, 26vw, 400px);
+    gap: clamp(24px, 3vw, 56px);
+    align-items: start;
+    position: relative;
+    z-index: 2;
+    padding-top: 24px;
+  }
+
+  /* Rails */
+  .hero-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 40px;
+  }
+
+  .rail-block {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--line-strong);
+    padding: 4px 0 4px 14px;
+  }
+
+  .rail-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .rail-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--bone);
+    letter-spacing: 0.01em;
+  }
+
+  /* Stage */
+  .hero-stage {
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 32px;
+  }
+
+  .hero-headline {
+    font-size: clamp(48px, 6.6vw, 104px);
+    color: var(--bone);
+  }
+
+  .hero-headline .line-mask {
+    display: block;
+  }
+
+  .hero-rule-wrap {
+    margin: 40px 0 28px;
+    width: 200px;
+  }
+
+  .hero-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .hero-lede {
+    max-width: 520px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.8);
+    margin-bottom: 40px;
+  }
+
+  /* Actions */
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 999px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    transition: background 0.5s var(--ease-luxe), transform 0.5s var(--ease-luxe);
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-bright);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary svg {
+    transition: transform 0.5s var(--ease-luxe);
+  }
+
+  .btn-primary:hover svg {
+    transform: rotate(45deg);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 6px;
+    color: var(--bone);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color 0.4s var(--ease-luxe), border-color 0.4s var(--ease-luxe);
+  }
+
+  .btn-ghost:hover {
+    color: var(--gold-bright);
+    border-color: var(--gold);
+  }
+
+  /* Portrait — show the full branded collage; matches its natural aspect */
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: #6a4a2c; /* brown to match the collage backdrop seamlessly */
+    will-change: transform, opacity;
+  }
+
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: contrast(1.02) saturate(1.04);
+  }
+
+  .portrait-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14,20,16,0) 50%, rgba(14,20,16,0.7) 100%);
+    pointer-events: none;
+  }
+
+  .portrait-tag {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    z-index: 2;
+  }
+
+  .portrait-tag-sub {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--bone-soft);
+  }
+
+  /* Scroll indicator — bottom-left, doesn't conflict with portrait */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: var(--pad);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 5;
+  }
+
+  .scroll-indicator span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+  }
+
+  .scroll-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    animation: scroll-pulse-h 2.4s ease-in-out infinite;
+    transform-origin: left center;
+  }
+
+  @keyframes scroll-pulse-h {
+    0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+    50% { opacity: 1; transform: scaleX(1); }
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .hero-grid-layout {
+      grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
+      gap: 32px;
+    }
+    .hero-rail.left {
+      display: none;
+    }
+    .hero-headline {
+      font-size: clamp(44px, 6.4vw, 80px);
+    }
+  }
+
+  @media (max-width: 820px) {
+    .hero {
+      padding: 100px var(--pad) 60px;
+      min-height: auto;
+    }
+    .hero-grid-layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding-top: 8px;
+    }
+    .hero-rail.right {
+      order: -1;
+      padding-top: 0;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .hero-stage {
+      text-align: left;
+    }
+    .portrait-frame {
+      aspect-ratio: 3 / 4;
+      width: 100%;
+    }
+    .hero-headline {
+      font-size: clamp(40px, 9.5vw, 64px);
+      letter-spacing: -0.015em;
+    }
+    .hero-rule-wrap {
+      margin: 28px 0 20px;
+      width: 120px;
+    }
+    .hero-lede {
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      gap: 12px;
+    }
+    .btn-primary {
+      padding: 14px 22px;
+      font-size: 11px;
+    }
+    .btn-ghost {
+      padding: 14px 4px;
+      font-size: 11px;
+    }
+    .scroll-indicator { display: none; }
+    .hero-frame { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-headline {
+      font-size: clamp(36px, 11vw, 56px);
+    }
+    .hero-eyebrow { margin-bottom: 22px; }
+    .hero-lede { font-size: 14px; }
+    .btn-primary, .btn-ghost {
+      padding: 12px 18px;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+    }
+  }
+</style>
+

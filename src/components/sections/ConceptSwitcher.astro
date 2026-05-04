@@ -1,0 +1,107 @@
+---
+interface Props {
+  active: 'A' | 'B' | 'C';
+}
+
+const { active } = Astro.props;
+
+const concepts = [
+  { id: 'A', label: 'Editorial', href: '/' },
+  { id: 'B', label: 'Spotlight', href: '/concept-2' },
+  { id: 'C', label: 'Cinematic', href: '/concept-3' },
+];
+---
+
+<div class="concept-switcher">
+  <span class="cs-label">Hero Concepts</span>
+  <div class="cs-pill">
+    {concepts.map((c) => (
+      <a
+        href={c.href}
+        class:list={['cs-item', { active: c.id === active }]}
+        aria-current={c.id === active ? 'page' : undefined}
+      >
+        <span class="cs-id">{c.id}</span>
+        <span class="cs-name">{c.label}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .concept-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cs-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    background: rgba(14, 20, 16, 0.8);
+    padding: 4px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .cs-pill {
+    display: flex;
+    background: rgba(14, 20, 16, 0.85);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 4px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .cs-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    color: var(--bone);
+    transition: background 0.4s var(--ease-luxe), color 0.4s var(--ease-luxe);
+  }
+
+  .cs-item:hover {
+    color: var(--gold-bright);
+  }
+
+  .cs-item.active {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .cs-id {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .cs-name {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .concept-switcher { bottom: 12px; }
+    .cs-label { display: none; }
+    .cs-item { padding: 6px 12px; gap: 6px; }
+    .cs-name { display: none; }
+    .cs-id { font-size: 13px; }
+  }
+</style>

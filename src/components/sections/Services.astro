@@ -1,0 +1,144 @@
+---
+import { services } from '../../lib/data';
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="services" id="services">
+  <RevealOnScroll client:visible>
+    <div class="services-inner container">
+      <header class="services-head">
+        <span class="eyebrow" data-reveal>
+          <span class="gold-rule"></span>Chapter II · The Programme
+        </span>
+        <h2 class="display services-title" data-reveal>
+          What Sean <em class="gold-italic">hosts</em>.
+        </h2>
+      </header>
+
+      <ol class="services-list">
+        {services.map((s) => (
+          <li class="service-row" data-reveal>
+            <span class="service-no">{s.no}</span>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-body">{s.body}</p>
+            <span class="service-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 17L17 3M17 3H6M17 3V14" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<style>
+  .services {
+    padding: 120px 0 140px;
+    background: var(--ink-deep);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .services-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+
+  .services-title {
+    font-size: clamp(48px, 7vw, 110px);
+    color: var(--bone);
+  }
+
+  .services-title em {
+    font-style: italic;
+  }
+
+  .services-list {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .service-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.4fr 60px;
+    gap: 40px;
+    align-items: start;
+    padding: 36px 12px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    transition: background 0.6s var(--ease-luxe), padding 0.6s var(--ease-luxe);
+  }
+
+  .service-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(200, 166, 100, 0.08), rgba(200, 166, 100, 0));
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-luxe);
+    pointer-events: none;
+  }
+
+  .service-row:hover::before { opacity: 1; }
+  .service-row:hover { padding-left: 28px; }
+  .service-row:hover .service-arrow { color: var(--gold-bright); transform: translate(6px, -6px); }
+  .service-row:hover .service-title { color: var(--gold-bright); }
+
+  .service-no {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    padding-top: 6px;
+  }
+
+  .service-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(28px, 3.4vw, 44px);
+    color: var(--bone);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    transition: color 0.5s var(--ease-luxe);
+  }
+
+  .service-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.7);
+    padding-top: 8px;
+    max-width: 56ch;
+  }
+
+  .service-arrow {
+    color: var(--muted);
+    transition: color 0.5s var(--ease-luxe), transform 0.5s var(--ease-luxe);
+    padding-top: 8px;
+    justify-self: end;
+  }
+
+  @media (max-width: 900px) {
+    .services-head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .service-row {
+      grid-template-columns: 60px 1fr 40px;
+      gap: 20px;
+      padding: 28px 0;
+    }
+    .service-body {
+      grid-column: 1 / -1;
+      padding-left: 80px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .service-body { padding-left: 0; }
+  }
+</style>

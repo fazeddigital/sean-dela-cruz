@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/sections/Nav.astro';
+import HeroConceptB from '../components/sections/HeroConceptB.astro';
+import About from '../components/sections/About.astro';
+import Services from '../components/sections/Services.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import StatsSection from '../components/sections/StatsSection.astro';
+import Reviews from '../components/sections/Reviews.astro';
+import Brands from '../components/sections/Brands.astro';
+import GroomSquad from '../components/sections/GroomSquad.astro';
+import Contact from '../components/sections/Contact.astro';
+import ConceptSwitcher from '../components/sections/ConceptSwitcher.astro';
+---
+
+<Layout title="Sean dela Cruz · Concept B — Spotlight">
+  <Nav />
+  <main>
+    <HeroConceptB />
+    <About />
+    <Services />
+    <StatsSection />
+    <Gallery />
+    <Reviews />
+    <Brands />
+    <GroomSquad />
+    <Contact />
+  </main>
+  <ConceptSwitcher active="B" />
+</Layout>

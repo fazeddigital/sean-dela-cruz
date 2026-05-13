@@ -19,17 +19,11 @@ A bespoke editorial site for **Sean Sajonia dela Cruz**, Iligan City's premier w
 
 ---
 
-## Three Hero Concepts
+## Hero Direction
 
-The site ships with three swappable hero treatments. A floating pill at the bottom of every page lets you A/B/C compare in the browser.
+Three concepts were explored during design (Editorial, Spotlight, Cinematic). The client selected **Editorial** — an asymmetric three-column composition: metadata rail · oversized stacked headline · portrait card. Magazine-spread feel.
 
-| ID | Route | Direction |
-| --- | --- | --- |
-| **A — Editorial** | `/` | Asymmetric three-column composition: metadata rail · oversized stacked headline · portrait card. Magazine-spread feel. |
-| **B — Spotlight** | `/concept-2` | Centered, theatrical. Sean's portrait spotlit dead-center; "SEAN" wraps above, italic gold "dela Cruz" wraps below. Slow rotating conic rays behind. |
-| **C — Cinematic** | `/concept-3` | Sean's photo fills the viewport. Editorial gradient + film grain overlay, decorative gold frame, big bottom-left typography, breathing zoom. |
-
-All three share: Modern Luxe palette, Fraunces type, full-bleed cities marquee, and identical downstream sections (About, Services, Stats, Gallery, Reviews, Brands, Groom Squad, Contact).
+The other two concepts were removed once the choice was finalized. Git history preserves them if you ever want to revisit.
 
 ---
 
@@ -95,18 +89,12 @@ src/
 │   │   ├── RevealOnScroll.tsx     ← ScrollTrigger.batch wrapper
 │   │   └── Stats.tsx              ← counter tweens
 │   └── sections/                  ← Astro sections
-│       ├── Hero.astro             ← Concept A
-│       ├── HeroConceptB.astro     ← Concept B
-│       ├── HeroConceptC.astro     ← Concept C
+│       ├── Hero.astro             ← Editorial hero
 │       ├── Marquee.astro          ← shared full-bleed cities ticker
-│       ├── ConceptSwitcher.astro  ← floating A/B/C pill
 │       └── …                      ← About, Services, Brands, etc.
 ├── layouts/Layout.astro
 ├── lib/data.ts                    ← profile, brands, services, gallery
-├── pages/
-│   ├── index.astro                ← Concept A
-│   ├── concept-2.astro            ← Concept B
-│   └── concept-3.astro            ← Concept C
+├── pages/index.astro              ← the single route
 └── styles/global.css              ← design tokens & base styles
 ```
 

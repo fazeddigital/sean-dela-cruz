@@ -23,17 +23,9 @@ npm run preview
 
 Port 4380 will fall back if occupied. Don't change the launch.json port unless asked.
 
-## Three hero concepts (don't merge them)
+## Hero direction (locked)
 
-The site ships three swappable hero treatments, each on its own route. The downstream sections (About → Contact) are reused as-is.
-
-| Route | Hero file | Direction |
-| --- | --- | --- |
-| `/` | `Hero.astro` | A · Editorial — three-column asymmetric |
-| `/concept-2` | `HeroConceptB.astro` | B · Spotlight — centered theatrical |
-| `/concept-3` | `HeroConceptC.astro` | C · Cinematic — fullscreen background |
-
-A floating `ConceptSwitcher` pill is rendered on every page so the user can A/B/C compare. If you add a new concept, add it to `ConceptSwitcher.astro`'s `concepts` array and create a matching page.
+The client picked the **Editorial** hero. There used to be three swappable concepts (A · Editorial, B · Spotlight, C · Cinematic) with a floating switcher pill — those were removed once the client decided. Git history has them if you ever need to revisit. The current hero is `src/components/sections/Hero.astro` — three-column asymmetric layout: metadata rail · oversized stacked headline · portrait card.
 
 ## File layout
 
@@ -119,7 +111,7 @@ Listed in `data.ts` `brands` and rendered in `Brands.astro`. Order matters (it's
 
 - Don't introduce Tailwind, styled-components, MUI, shadcn, or any other UI/styling lib.
 - Don't replace Fraunces with a generic font (Inter, Roboto, system-ui) — the editorial feel depends on it.
-- Don't merge or simplify the three hero concepts into one — they're an intentional A/B/C exploration the client is comparing.
+- Don't resurrect the old Spotlight / Cinematic hero concepts — the client picked Editorial. Reach for git history if you ever need to reference them.
 - Don't add comments explaining what well-named code does. The codebase already follows this.
 - Don't commit `node_modules`, `dist`, `.astro/`, `.env*`, or `.DS_Store` (covered by `.gitignore`).
 - Don't push to `main` without confirmation from the user — confirm first.

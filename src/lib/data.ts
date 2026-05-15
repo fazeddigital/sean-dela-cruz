@@ -89,6 +89,7 @@ export const brands = [
     sub: 'Professional Host',
     tagline: 'The flagship — Sean dela Cruz on the mic.',
     accent: 'Hosting',
+    image: '/images/brands/msm.jpg',
   },
   {
     no: '02',
@@ -96,6 +97,7 @@ export const brands = [
     sub: 'Suit Gallery',
     tagline: 'Bespoke menswear showroom in Tipanoy, Iligan.',
     accent: 'Menswear',
+    image: '/images/brands/tgs.jpg',
   },
   {
     no: '03',
@@ -103,6 +105,7 @@ export const brands = [
     sub: 'Bridal Studio',
     tagline: "A dedicated atelier for the bride's day.",
     accent: 'Bridal',
+    image: '/images/brands/tbs.jpg',
   },
   {
     no: '04',
@@ -110,6 +113,7 @@ export const brands = [
     sub: 'Event Rentals',
     tagline: 'Furniture, lights, fixtures — staged and delivered.',
     accent: 'Rentals',
+    image: '/images/brands/sm.jpg',
   },
   {
     no: '05',
@@ -117,6 +121,7 @@ export const brands = [
     sub: 'The Ultimate 360 Experience',
     tagline: 'Slow-motion 360° video booth for guest moments.',
     accent: 'Photo & Video',
+    image: '/images/brands/glamcam.jpg',
   },
   {
     no: '06',
@@ -124,36 +129,105 @@ export const brands = [
     sub: 'Group of Companies',
     tagline: 'The parent — every brand, one house.',
     accent: 'Holding Group',
+    image: '/images/brands/spdc.jpg',
   },
 ];
 
-// Portrait — drop the file at public/images/sean-portrait.jpg
-export const portraitHero = '/images/sean-portrait.jpg';
+export const portraitHero = '/images/sean-hero.jpg';
 
-// Stand-in event photography (replace with Sean's real plates).
 export const gallery = [
+  { src: '/images/gallery/01-iligan-cultural.jpg', caption: 'Cultural Programme · Iligan' },
+  { src: '/images/gallery/02-ballroom-manila.jpg', caption: 'Ballroom · Manila' },
+  { src: '/images/gallery/03-grand-opening.jpg', caption: 'Grand Opening · The Groom Squad' },
+  { src: '/images/gallery/04-varsity-iligan.jpg', caption: 'Varsity Night · Iligan' },
+  { src: '/images/gallery/05-destination-wedding.jpg', caption: 'Destination Wedding · Bukidnon' },
+  { src: '/images/gallery/06-outdoor-barong.jpg', caption: 'Outdoor Programme · Iligan' },
+  { src: '/images/gallery/07-centerstage-msu.jpg', caption: 'Centerstage · MSU' },
+  { src: '/images/gallery/08-pageant-muph.jpg', caption: 'Mutya ng Pilipinas · Iligan' },
+  { src: '/images/gallery/09-alumni-night.jpg', caption: 'Alumni Homecoming · Iligan' },
+  { src: '/images/gallery/10-highland-wedding.jpg', caption: 'Highland Wedding · Bukidnon' },
+  { src: '/images/gallery/11-miss-world-asia.jpg', caption: 'Miss World Asia · Coronation' },
+  { src: '/images/gallery/12-live-performance.jpg', caption: 'Live Programme · Mall Stage' },
+];
+
+export const archiveCategories = [
+  { id: 'all', label: 'All Plates' },
+  { id: 'weddings', label: 'Weddings' },
+  { id: 'pageants', label: 'Pageants' },
+  { id: 'hosting', label: 'Live Hosting' },
+  { id: 'studios', label: 'Studios' },
+  { id: 'international', label: 'International' },
+] as const;
+
+export type ArchiveCategory = (typeof archiveCategories)[number]['id'];
+
+export const archive: { src: string; caption: string; cat: Exclude<ArchiveCategory, 'all'> }[] = [
+  // Weddings
+  { src: '/images/archive/wed-01-onstage.jpg', caption: 'Reception · Iligan', cat: 'weddings' },
+  { src: '/images/archive/wed-02-bride-group.jpg', caption: 'Wedding Party · Iligan', cat: 'weddings' },
+  { src: '/images/archive/wed-03-church.jpg', caption: 'Ceremony · Iligan', cat: 'weddings' },
+  { src: '/images/archive/wed-04-baguio.jpg', caption: 'Pre-Wedding · Baguio', cat: 'weddings' },
+  { src: '/images/archive/wed-05-barong-couple.jpg', caption: 'Couple · Filipiniana', cat: 'weddings' },
+  { src: '/images/gallery/05-destination-wedding.jpg', caption: 'Destination · Bukidnon', cat: 'weddings' },
+  { src: '/images/gallery/10-highland-wedding.jpg', caption: 'Highland Wedding · Bukidnon', cat: 'weddings' },
+
+  // Pageants
+  { src: '/images/archive/pgt-01-mutya-backdrop.jpg', caption: 'Mutya ng Pilipinas · Iligan', cat: 'pageants' },
+  { src: '/images/archive/pgt-02-mutya-finale.jpg', caption: 'Mutya Finale · Iligan', cat: 'pageants' },
+  { src: '/images/archive/pgt-03-red-carpet.jpg', caption: 'Red Carpet · Pageant Night', cat: 'pageants' },
+  { src: '/images/archive/pgt-04-mutya-cohost.jpg', caption: 'Co-Host · Mutya ng Pilipinas', cat: 'pageants' },
+  { src: '/images/archive/pgt-05-miss-world-iligan.jpg', caption: 'Miss World · Iligan', cat: 'pageants' },
+  { src: '/images/archive/deb-01-purple-gown.jpg', caption: 'Debut · Maggie Cajelis', cat: 'pageants' },
+  { src: '/images/archive/deb-02-red-gown.jpg', caption: 'Debut · Iligan', cat: 'pageants' },
+  { src: '/images/gallery/08-pageant-muph.jpg', caption: 'Mutya ng Pilipinas · Iligan', cat: 'pageants' },
+  { src: '/images/gallery/11-miss-world-asia.jpg', caption: 'Miss World Asia · Coronation', cat: 'pageants' },
+
+  // Live Hosting
+  { src: '/images/archive/host-01-lasalle-homecoming.jpg', caption: 'High School Homecoming · 2025', cat: 'hosting' },
+  { src: '/images/archive/host-02-alumni-stage.jpg', caption: 'Alumni Gala · Iligan', cat: 'hosting' },
+  { src: '/images/archive/host-03-graduation.jpg', caption: 'Graduation · Cagayan de Oro', cat: 'hosting' },
+  { src: '/images/gallery/01-iligan-cultural.jpg', caption: 'Cultural Programme · Iligan', cat: 'hosting' },
+  { src: '/images/gallery/03-grand-opening.jpg', caption: 'Grand Opening · The Groom Squad', cat: 'hosting' },
+  { src: '/images/gallery/04-varsity-iligan.jpg', caption: 'Varsity Night · Iligan', cat: 'hosting' },
+  { src: '/images/gallery/06-outdoor-barong.jpg', caption: 'Outdoor Programme · Iligan', cat: 'hosting' },
+  { src: '/images/gallery/07-centerstage-msu.jpg', caption: 'Centerstage · MSU', cat: 'hosting' },
+  { src: '/images/gallery/09-alumni-night.jpg', caption: 'Alumni Homecoming · Iligan', cat: 'hosting' },
+  { src: '/images/gallery/12-live-performance.jpg', caption: 'Live Programme · Mall Stage', cat: 'hosting' },
+
+  // Studios (TBS + TGS)
+  { src: '/images/archive/studio-01-tbs-interior.jpg', caption: 'The Bride Squad · Atelier', cat: 'studios' },
+  { src: '/images/archive/studio-02-tbs-products.jpg', caption: 'The Bride Squad · Bouquet', cat: 'studios' },
+  { src: '/images/archive/studio-03-tgs-storefront.jpg', caption: 'The Groom Squad · Tipanoy', cat: 'studios' },
+  { src: '/images/archive/studio-04-tgs-accessories.jpg', caption: 'The Groom Squad · Accessories', cat: 'studios' },
+
+  // International
+  { src: '/images/archive/intl-01-okada-night.jpg', caption: 'Okada Manila · Pre-Show', cat: 'international' },
+  { src: '/images/gallery/02-ballroom-manila.jpg', caption: 'Ballroom · Manila', cat: 'international' },
+];
+
+export const tour = [
   {
-    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Wedding · Cagayan de Oro',
+    no: 'I',
+    title: 'Singapore',
+    sub: 'First International Event',
+    date: 'January · 2024',
+    venue: 'Marina Bay',
+    image: '/images/tour/singapore-first.jpg',
   },
   {
-    src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Reception · Iligan',
+    no: 'II',
+    title: 'Singapore',
+    sub: 'Once Again — Second International',
+    date: 'September · 2024',
+    venue: 'Singapore',
+    image: '/images/tour/singapore-once-again.jpg',
   },
   {
-    src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Ceremony · Bohol',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Corporate Gala · Singapore',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Evening Programme · Manila',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1530023367847-a683933f4172?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Debut · Cebu',
+    no: 'III',
+    title: 'Manila',
+    sub: 'Live in Okada',
+    date: 'November · 2024',
+    venue: 'Okada Manila',
+    image: '/images/tour/manila-okada.jpg',
   },
 ];

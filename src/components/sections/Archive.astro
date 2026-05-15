@@ -1,0 +1,322 @@
+---
+import ArchiveGrid from '../react/ArchiveGrid';
+---
+
+<section class="archive-section" id="archive">
+  <div class="container">
+    <header class="archive-head">
+      <span class="eyebrow">
+        <span class="gold-rule"></span>The Archive · Every Plate
+      </span>
+      <h2 class="display archive-title">
+        Browse the <em class="gold-italic">full collection</em>.
+      </h2>
+      <p class="archive-lede">
+        Every plate, filterable. Weddings, pageants, hosting, the SPDC studios,
+        and international engagements — pull any thread.
+      </p>
+    </header>
+
+    <ArchiveGrid client:visible />
+  </div>
+</section>
+
+<style is:global>
+  .archive-section {
+    padding: 140px 0 160px;
+    background: var(--ink);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .archive-section::before {
+    content: "ARCHIVE";
+    position: absolute;
+    top: 60px;
+    left: 4%;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(120px, 16vw, 240px);
+    color: rgba(200, 166, 100, 0.04);
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .archive-head {
+    max-width: 760px;
+    margin: 0 auto 64px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .archive-title {
+    font-size: clamp(40px, 6vw, 88px);
+    color: var(--bone);
+    line-height: 0.96;
+    margin: 24px 0 28px;
+  }
+
+  .archive-title em { font-style: italic; }
+
+  .archive-lede {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.78);
+    max-width: 58ch;
+    margin: 0 auto;
+  }
+
+  /* Filter chips */
+  .archive-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 56px;
+    max-width: 920px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .archive-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--bone-soft);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    cursor: pointer;
+    transition:
+      background 0.4s var(--ease-luxe),
+      color 0.4s var(--ease-luxe),
+      border-color 0.4s var(--ease-luxe);
+  }
+
+  .archive-chip:hover {
+    border-color: var(--gold);
+    color: var(--bone);
+  }
+
+  .archive-chip.is-active {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+
+  .archive-chip-count {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
+  }
+
+  .archive-chip.is-active .archive-chip-count {
+    opacity: 0.8;
+  }
+
+  /* Grid */
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .archive-tile {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: pointer;
+    padding: 0;
+    isolation: isolate;
+    transition: transform 0.5s var(--ease-luxe), border-color 0.5s var(--ease-luxe);
+  }
+
+  .archive-tile:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .archive-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease-luxe), filter 0.6s var(--ease-luxe);
+    filter: grayscale(0.18) contrast(1.04) brightness(0.92);
+  }
+
+  .archive-tile:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0) contrast(1.06) brightness(1);
+  }
+
+  .archive-caption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 12px;
+    padding-top: 40px;
+    background: linear-gradient(180deg, transparent, rgba(14,20,16,0.85) 70%);
+    margin: -40px -12px -12px;
+    padding: 40px 12px 12px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s var(--ease-luxe), transform 0.4s var(--ease-luxe);
+  }
+
+  .archive-tile:hover .archive-caption,
+  .archive-tile:focus-visible .archive-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .archive-caption-no {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-bright);
+    font-size: 12px;
+  }
+
+  .archive-caption-text {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--bone);
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  /* Lightbox */
+  .archive-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 10, 9, 0.94);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vh 5vw;
+    animation: lb-fade 0.3s var(--ease-luxe);
+  }
+
+  @keyframes lb-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lb-figure {
+    max-width: 90vw;
+    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: lb-pop 0.4s var(--ease-luxe);
+  }
+
+  @keyframes lb-pop {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .lb-figure img {
+    max-width: 90vw;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--gold);
+    background: #000;
+  }
+
+  .lb-figure figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: var(--bone);
+    gap: 24px;
+  }
+
+  .lb-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  .lb-caption {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--bone-soft);
+  }
+
+  .lb-btn, .lb-close {
+    position: fixed;
+    background: rgba(14, 20, 16, 0.7);
+    border: 1px solid var(--line-strong);
+    color: var(--bone);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s var(--ease-luxe), border-color 0.3s var(--ease-luxe), color 0.3s var(--ease-luxe);
+  }
+
+  .lb-btn:hover, .lb-close:hover {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+
+  .lb-prev { left: 24px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 24px; top: 50%; transform: translateY(-50%); }
+  .lb-close { top: 24px; right: 24px; font-size: 24px; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .archive-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 760px) {
+    .archive-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .archive-section { padding: 100px 0 120px; }
+    .archive-filters { gap: 8px; }
+    .archive-chip { padding: 9px 14px; font-size: 10px; letter-spacing: 0.22em; }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+    .lb-btn, .lb-close { width: 42px; height: 42px; font-size: 24px; }
+    .archive-caption {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .archive-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # claude local
 .claude/settings.local.json
+
+# local photo import staging (raw zips, originals)
+.photo-import/

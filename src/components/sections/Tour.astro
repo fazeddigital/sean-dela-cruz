@@ -1,0 +1,236 @@
+---
+import { tour } from '../../lib/data';
+import RevealOnScroll from '../react/RevealOnScroll';
+---
+
+<section class="tour" id="tour">
+  <RevealOnScroll client:visible stagger={0.1}>
+    <div class="container">
+      <header class="tour-head">
+        <span class="eyebrow" data-reveal>
+          <span class="gold-rule"></span>On The Road · International Tour
+        </span>
+        <h2 class="display tour-title" data-reveal>
+          From Iligan,<br/>
+          <em class="gold-italic">to the world.</em>
+        </h2>
+        <p class="tour-lede" data-reveal>
+          The mic does not stop at the city limits. Singapore, Manila, and
+          venues across the archipelago — three featured stops from the road
+          so far.
+        </p>
+      </header>
+
+      <div class="tour-grid">
+        {tour.map((stop) => (
+          <article class="tour-card" data-reveal>
+            <div class="tour-poster">
+              <img src={stop.image} alt={`${stop.title} — ${stop.sub}`} loading="lazy" />
+              <span class="tour-no">№ {stop.no}</span>
+            </div>
+            <div class="tour-meta">
+              <div class="tour-meta-top">
+                <span class="tour-city">{stop.title}</span>
+                <span class="tour-date">{stop.date}</span>
+              </div>
+              <p class="tour-sub">{stop.sub}</p>
+              <div class="tour-venue">
+                <span class="venue-label">Venue</span>
+                <span class="venue-value">{stop.venue}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </RevealOnScroll>
+</section>
+
+<style>
+  .tour {
+    padding: 140px 0 160px;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tour::before {
+    content: "TOUR";
+    position: absolute;
+    top: 60px;
+    right: 6%;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(140px, 18vw, 280px);
+    color: rgba(200, 166, 100, 0.04);
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .tour-head {
+    max-width: 720px;
+    margin: 0 auto 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tour-title {
+    font-size: clamp(40px, 6vw, 96px);
+    color: var(--bone);
+    line-height: 0.95;
+    margin: 24px 0 32px;
+  }
+
+  .tour-title em { font-style: italic; }
+
+  .tour-lede {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(244, 239, 230, 0.78);
+    max-width: 58ch;
+    margin: 0 auto;
+  }
+
+  .tour-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.4vw, 36px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .tour-card {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.6s var(--ease-luxe);
+  }
+
+  .tour-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .tour-poster {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #0a0e0c;
+    border: 1px solid var(--line-strong);
+    isolation: isolate;
+  }
+
+  .tour-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 1s var(--ease-luxe), filter 0.6s var(--ease-luxe);
+    filter: contrast(1.03);
+  }
+
+  .tour-card:hover .tour-poster img {
+    transform: scale(1.04);
+  }
+
+  .tour-poster::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.5s var(--ease-luxe);
+  }
+
+  .tour-card:hover .tour-poster::after {
+    border-color: rgba(200, 166, 100, 0.5);
+  }
+
+  .tour-no {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold-bright);
+    background: rgba(14, 20, 16, 0.75);
+    border: 1px solid rgba(200, 166, 100, 0.35);
+    padding: 4px 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .tour-meta {
+    padding: 24px 4px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tour-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+
+  .tour-city {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.2vw, 28px);
+    color: var(--bone);
+    letter-spacing: -0.01em;
+  }
+
+  .tour-date {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .tour-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--bone-soft);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .tour-venue {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .venue-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+  }
+
+  .venue-value {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--bone);
+  }
+
+  @media (max-width: 960px) {
+    .tour-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .tour { padding: 100px 0 120px; }
+    .tour-head { margin-bottom: 56px; }
+    .tour-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
